@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nihongo Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HOME -->
+        <section id="home" class="screen active">
+            <div class="logo">🇯🇵</div>
+            <h1>Nihongo Quiz</h1>
+            <p>Belajar Bahasa Jepang melalui permainan!</p>
+
+            <button onclick="showCategory()">Mulai Game</button>
+        </section>
+
+
+        <!-- CATEGORY -->
+        <section id="category" class="screen">
+
+            <h2>Pilih Materi</h2>
+            <p>Pilih materi yang ingin kamu pelajari.</p>
+
+            <div class="category-list">
+
+                <button onclick="startGame('kosakata')">
+                    📖 Kosakata
+                </button>
+
+                <button onclick="startGame('pekerjaan')">
+                    👨‍🏫 Pekerjaan
+                </button>
+
+                <button onclick="startGame('suki')">
+                    ❤️ 好きです
+                </button>
+
+                <button onclick="startGame('campuran')">
+                    🎲 Campuran
+                </button>
+
+            </div>
+
+            <button class="back" onclick="showHome()">
+                ← Kembali
+            </button>
+
+        </section>
+
+
+        <!-- QUIZ -->
+        <section id="quiz" class="screen">
+
+            <div class="quiz-header">
+                <span id="questionNumber">Soal 1 / 10</span>
+                <span id="score">⭐ 0</span>
+            </div>
+
+            <div class="progress">
+                <div id="progressBar"></div>
+            </div>
+
+            <div class="question-box">
+                <h2 id="question">Pertanyaan</h2>
+            </div>
+
+            <div id="answers" class="answers">
+                <!-- Jawaban dibuat oleh JavaScript -->
+            </div>
+
+            <p id="feedback"></p>
+
+            <button id="nextButton" onclick="nextQuestion()">
+                Soal Berikutnya →
+            </button>
+
+        </section>
+
+
+        <!-- RESULT -->
+        <section id="result" class="screen">
+
+            <div class="result-icon">🎉</div>
+
+            <h2>Game Selesai!</h2>
+
+            <p>Skor kamu:</p>
+
+            <div class="final-score">
+                <span id="finalScore">0</span>
+                <small>/ 10</small>
+            </div>
+
+            <p id="resultMessage"></p>
+
+            <button onclick="restartGame()">
+                🔄 Main Lagi
+            </button>
+
+            <button class="back" onclick="showHome()">
+                🏠 Menu Utama
+            </button>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
