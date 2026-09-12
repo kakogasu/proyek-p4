@@ -3,115 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Nihongo Quiz</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- HOME -->
-        <section id="home" class="screen active">
-            <div class="logo">🇯🇵</div>
-            <h1>Nihongo Quiz</h1>
-            <p>Belajar Bahasa Jepang melalui permainan!</p>
+    <!-- =========================
+         HOME
+    ========================== -->
 
-            <button onclick="showCategory()">Mulai Game</button>
-        </section>
+    <section id="home" class="screen active">
+
+        <div class="logo">🇯🇵</div>
+
+        <h1>Nihongo Quiz</h1>
+
+        <p>
+            Belajar Bahasa Jepang melalui permainan!
+        </p>
+
+        <button onclick="showCategory()">
+            🎮 Mulai Game
+        </button>
+
+    </section>
 
 
-        <!-- CATEGORY -->
-        <section id="category" class="screen">
+    <!-- =========================
+         CATEGORY
+    ========================== -->
 
-            <h2>Pilih Materi</h2>
-            <p>Pilih materi yang ingin kamu pelajari.</p>
+    <section id="category" class="screen">
 
-            <div class="category-list">
+        <h2>Pilih Materi</h2>
 
-                <button onclick="startGame('kosakata')">
-                    📖 Kosakata
-                </button>
+        <p>
+            Pilih materi yang ingin kamu pelajari.
+        </p>
 
-                <button onclick="startGame('pekerjaan')">
-                    👨‍🏫 Pekerjaan
-                </button>
+        <div class="category-list">
 
-                <button onclick="startGame('suki')">
-                    ❤️ 好きです
-                </button>
-
-                <button onclick="startGame('campuran')">
-                    🎲 Campuran
-                </button>
-
-            </div>
-
-            <button class="back" onclick="showHome()">
-                ← Kembali
+            <button onclick="openLearning('kosakata')">
+                📖 Kosakata
             </button>
 
-        </section>
-
-
-        <!-- QUIZ -->
-        <section id="quiz" class="screen">
-
-            <div class="quiz-header">
-                <span id="questionNumber">Soal 1 / 10</span>
-                <span id="score">⭐ 0</span>
-            </div>
-
-            <div class="progress">
-                <div id="progressBar"></div>
-            </div>
-
-            <div class="question-box">
-                <h2 id="question">Pertanyaan</h2>
-            </div>
-
-            <div id="answers" class="answers">
-                <!-- Jawaban dibuat oleh JavaScript -->
-            </div>
-
-            <p id="feedback"></p>
-
-            <button id="nextButton" onclick="nextQuestion()">
-                Soal Berikutnya →
+            <button onclick="openLearning('pekerjaan')">
+                👨‍🏫 Pekerjaan
             </button>
 
-        </section>
+            <button onclick="openLearning('suki')">
+                ❤️ 好きです
+            </button>
+
+            <button onclick="openLearning('campuran')">
+                🎲 Campuran
+            </button>
+
+        </div>
+
+        <button class="back" onclick="showHome()">
+            ← Kembali
+        </button>
+
+    </section>
 
 
-        <!-- RESULT -->
-        <section id="result" class="screen">
+    <!-- =========================
+         LEARNING MENU
+    ========================== -->
 
-            <div class="result-icon">🎉</div>
+    <section id="learning" class="screen">
 
-            <h2>Game Selesai!</h2>
+        <div class="logo small-logo">
+            📚
+        </div>
 
-            <p>Skor kamu:</p>
+        <h2 id="learningTitle">
+            Materi
+        </h2>
 
-            <div class="final-score">
-                <span id="finalScore">0</span>
-                <small>/ 10</small>
+        <p>
+            Pilih cara belajar.
+        </p>
+
+        <button onclick="startFlashcard()">
+            🃏 Flashcard
+        </button>
+
+        <button onclick="startGame(selectedCategory)">
+            🎮 Mulai Quiz
+        </button>
+
+        <button class="back" onclick="showCategory()">
+            ← Kembali
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         FLASHCARD
+    ========================== -->
+
+    <section id="flashcard" class="screen">
+
+        <div class="flashcard-header">
+
+            <span id="flashcardNumber">
+                Kartu 1 / 5
+            </span>
+
+        </div>
+
+
+        <!-- CARD -->
+
+        <div
+            class="flashcard"
+            id="flashcardCard"
+            onclick="flipCard()"
+        >
+
+            <div class="flashcard-inner">
+
+                <!-- DEPAN -->
+
+                <div class="flashcard-front">
+
+                    <span class="card-label">
+                        Bahasa Jepang
+                    </span>
+
+                    <h2 id="flashcardFront">
+                        いしゃ
+                    </h2>
+
+                    <p>
+                        Klik kartu untuk membalik
+                    </p>
+
+                </div>
+
+
+                <!-- BELAKANG -->
+
+                <div class="flashcard-back">
+
+                    <span class="card-label">
+                        Arti
+                    </span>
+
+                    <h2 id="flashcardBack">
+                        Dokter
+                    </h2>
+
+                    <p id="flashcardReading">
+                        いしゃ (isha)
+                    </p>
+
+                </div>
+
             </div>
 
-            <p id="resultMessage"></p>
+        </div>
 
-            <button onclick="restartGame()">
-                🔄 Main Lagi
+
+        <!-- NAVIGATION -->
+
+        <div class="flashcard-navigation">
+
+            <button
+                id="previousCard"
+                onclick="previousCard()"
+            >
+                ← Sebelumnya
             </button>
 
-            <button class="back" onclick="showHome()">
-                🏠 Menu Utama
+            <button
+                id="nextCard"
+                onclick="nextCard()"
+            >
+                Berikutnya →
             </button>
 
-        </section>
+        </div>
 
-    </div>
 
-    <script src="script.js"></script>
+        <button
+            class="flip-button"
+            onclick="flipCard()"
+        >
+            🔄 Balik Kartu
+        </button>
+
+
+        <button
+            class="back"
+            onclick="showCategory()"
+        >
+            ← Pilih Materi
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         QUIZ
+    ========================== -->
+
+    <section id="quiz" class="screen">
+
+        <div class="quiz-header">
+
+            <span id="questionNumber">
+                Soal 1 / 10
+            </span>
+
+            <span id="score">
+                ⭐ 0
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+        <div class="question-box">
+
+            <h2 id="question">
+                Pertanyaan
+            </h2>
+
+        </div>
+
+
+        <div id="answers" class="answers">
+        </div>
+
+
+        <p id="feedback"></p>
+
+
+        <button
+            id="nextButton"
+            onclick="nextQuestion()"
+        >
+            Soal Berikutnya →
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         RESULT
+    ========================== -->
+
+    <section id="result" class="screen">
+
+        <div class="result-icon">
+            🎉
+        </div>
+
+        <h2>
+            Game Selesai!
+        </h2>
+
+        <p>
+            Skor kamu:
+        </p>
+
+
+        <div class="final-score">
+
+            <span id="finalScore">
+                0
+            </span>
+
+            <small>
+                / 10
+            </small>
+
+        </div>
+
+
+        <p id="resultMessage"></p>
+
+
+        <button onclick="restartGame()">
+            🔄 Main Lagi
+        </button>
+
+
+        <button
+            class="back"
+            onclick="showHome()"
+        >
+            🏠 Menu Utama
+        </button>
+
+    </section>
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
